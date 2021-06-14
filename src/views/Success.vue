@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-5">
     <Loader v-if="loader" />
-    <div v-if="!error" class="content mx-auto text-center text-h5">
+    <div v-if="!error  && !loader" class="content mx-auto text-center text-h5">
       <v-img class="image" src="../assets/success.gif"></v-img>
       {{ content }} Fizz coins added to your wallet. Click
       <a href="/"> here </a> to see your updated balance
@@ -15,11 +15,11 @@
 
 <script>
 import axios from "axios";
-import Crypto from 'crypto-js'
-import Loader from '../components/Loader'
+import Crypto from "crypto-js";
+import Loader from "../components/Loader";
 export default {
-  components:{
-    Loader
+  components: {
+    Loader,
   },
   data() {
     return {
@@ -32,6 +32,7 @@ export default {
 
   methods: {
     async get() {
+      this.error = false
       const response = await axios.post(
         "http://api.fizzcoin.org/api/payment/details",
         {
@@ -39,15 +40,13 @@ export default {
         }
       );
 
+      console.log(response);
       if (response.data.status === 400) {
         this.content = response.data.msg;
         this.loader = false;
         this.error = true;
       }
-      if (
-        response.data.status === 200 &&
-        response.data.transaction.type === 0
-      ) {
+      if (response.data.status === 200) {
         const userInfo = localStorage.getItem("user");
         //  console.log(userInfo)
         const decrypted = Crypto.AES.decrypt(
@@ -58,7 +57,7 @@ export default {
         const wallet = JSON.parse(decrypted);
         let data = {
           recieveraddress: wallet.walladdress,
-          inputvalue: response.data.transaction.mag,
+          inputvalue: response.data.transaction.fizz,
         };
         const post = await axios.post(
           "http://api.fizzcoin.org:5000/eth/transfertokenfromadmin",
@@ -67,12 +66,7 @@ export default {
 
         if (post.status === 200) {
           this.content = data.inputvalue + "";
-          this.loader = false;
-        }
-      } else {
-        if (response.data.transaction.type === 1) {
-          this.content =
-            "$" + response.data.transaction.mag + " Plan has been purchased";
+          
           this.loader = false;
         }
       }
@@ -86,7 +80,7 @@ export default {
 </script>
 
 <style scoped>
-.content{
+.content {
   width: 100%;
   height: 90vh;
   display: flex;
@@ -95,7 +89,7 @@ export default {
   flex-direction: column;
 }
 
-.image{
+.image {
   width: 300px;
   object-fit: cover;
 }

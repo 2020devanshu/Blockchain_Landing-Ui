@@ -295,15 +295,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
+     
           <v-list-item color="indigo" router to="/profile">
-            <v-list-item-icon>
-              <v-icon color="indigo--text">fa fa-user</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title color="indigo">Refferal</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item color="indigo" router to="/refferal">
             <v-list-item-icon>
               <v-icon color="indigo--text">fa fa-user</v-icon>
             </v-list-item-icon>

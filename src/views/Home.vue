@@ -1,6 +1,6 @@
 <template>
   <div>
-      <AdminHome v-if="this.$store.state.adminAuthentication" />
+    <AdminHome v-if="this.$store.state.adminAuthentication" />
     <v-container v-if="!this.$store.state.adminAuthentication" class="my-5">
       <v-dialog v-model="dialog" width="600">
         <v-card class="d-flex flex-column align-center pa-5">
@@ -27,63 +27,149 @@
         Dashboard
       </p>
       <v-layout row wrap>
-          <v-flex xs12 md6 lg4>
-             <v-hover v-slot="{ hover }" open-delay="200">
-                <v-card class="purple accent-2 d-flex align-center justify-space-between pa-5 ma-5" :elevation="hover ? 16 : 2">
-                    <v-flex xs6>
-                        <v-list-item three-line>
-                                  <v-list-item-content>
-                                      <div class="mb-4">
-                                          <v-btn fab color="amber darken-4" elevation="0">
-                                              <v-img class="mog" src="./assets/img/logo-fizz.png"></v-img>
-                                          </v-btn>
-                                      </div>
-                                      <v-list-item-title class="headline mb-1 white--text">
-                                          {{ mag }} Fizz
-                                      </v-list-item-title>
-                                      <v-list-item-subtitle class="white--text">
-                                          Fizz Balance
-                                      </v-list-item-subtitle>
-                                  </v-list-item-content>
-                              </v-list-item>
-                    </v-flex>
-                    <v-flex xs6>
-                        <v-img src="../assets/wallet.svg" class="image ml-7"></v-img>
-                    </v-flex>
-                </v-card>
-             </v-hover>
-          </v-flex>
-          <v-flex xs12 md6 lg4>
-             <v-hover v-slot="{ hover }" open-delay="200">
-                <v-card class="cyan darken-4 d-flex align-center justify-space-between pa-5 ma-5" :elevation="hover ? 16 : 2">
-                    <v-flex xs6>
-                        <v-list-item three-line>
-                                  <v-list-item-content>
-                                      <div class="mb-4">
-                                          <v-btn fab color="light-blue lighten-2" elevation="0">
-                                              <v-img class="mog" src="./assets/img/logo-fizz.png"></v-img>
-                                          </v-btn>
-                                      </div>
-                                      <v-list-item-title class="headline mb-1 white--text">
-                                          ${{parseInt((mag*0.003)*10000)/10000}}
-                                      </v-list-item-title>
-                                      <v-list-item-subtitle class="white--text">
-                                          Fizz(USD)
-                                      </v-list-item-subtitle>
-                                  </v-list-item-content>
-                              </v-list-item>
-                    </v-flex>
-                    <v-flex xs6>
-                        <v-img src="../assets/wallet.svg" class="image ml-7"></v-img>
-                    </v-flex>
-                </v-card>
-             </v-hover>
-          </v-flex>
-      
-          
-          
+        <v-flex xs12 md6 lg4>
+          <v-hover v-slot="{ hover }" open-delay="200">
+            <v-card
+              class="
+                purple
+                accent-2
+                d-flex
+                align-center
+                justify-space-between
+                pa-5
+                ma-5
+              "
+              :elevation="hover ? 16 : 2"
+            >
+              <v-flex xs6>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <div class="mb-4">
+                      <v-btn fab color="amber darken-4" elevation="0">
+                        <v-img
+                          class="mog"
+                          src="./assets/img/logo-fizz.png"
+                        ></v-img>
+                      </v-btn>
+                    </div>
+                    <v-list-item-title class="headline mb-1 white--text">
+                      {{ mag }} Fizz
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="white--text">
+                      Fizz Balance
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-flex>
+              <v-flex xs6>
+                <v-img src="../assets/wallet.svg" class="image ml-7"></v-img>
+              </v-flex>
+            </v-card>
+          </v-hover>
+        </v-flex>
+        <v-flex xs12 md6 lg4>
+          <v-hover v-slot="{ hover }" open-delay="200">
+            <v-card
+              class="
+                cyan
+                darken-4
+                d-flex
+                align-center
+                justify-space-between
+                pa-5
+                ma-5
+              "
+              :elevation="hover ? 16 : 2"
+            >
+              <v-flex xs6>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <div class="mb-4">
+                      <v-btn fab color="light-blue lighten-2" elevation="0">
+                        <v-img
+                          class="mog"
+                          src="./assets/img/logo-fizz.png"
+                        ></v-img>
+                      </v-btn>
+                    </div>
+                    <v-list-item-title class="headline mb-1 white--text">
+                      ${{ parseInt(mag * 0.003 * 10000) / 10000 }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="white--text">
+                      Fizz(USD)
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-flex>
+              <v-flex xs6>
+                <v-img src="../assets/wallet.svg" class="image ml-7"></v-img>
+              </v-flex>
+            </v-card>
+          </v-hover>
+        </v-flex>
+        <v-flex xs12 md6 lg4>
+          <v-hover v-slot="{ hover }" open-delay="200">
+            <v-card
+              class="
+                cyan
+                darken-1
+                d-flex
+                align-center
+                justify-space-between
+                pa-5
+                ma-5
+              "
+              :elevation="hover ? 16 : 2"
+            >
+              <v-flex xs6>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <div class="mb-4">
+                      <v-btn fab color="light-blue lighten-2" elevation="0">
+                        <v-img
+                          class="mog"
+                          src="./assets/img/logo-fizz.png"
+                        ></v-img>
+                      </v-btn>
+                    </div>
+                    <v-list-item-title class="headline mb-1 white--text">
+                      $0
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="white--text">
+                      Refferal Coins
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-flex>
+              <v-flex xs6>
+                <v-img src="../assets/wallet.svg" class="image ml-7"></v-img>
+              </v-flex>
+            </v-card>
+          </v-hover>
+        </v-flex>
       </v-layout>
-      
+
+      <v-layout row wrap>
+        <v-flex x12 md12 lg12>
+          <v-card class="pa-5 ma-5 d-flex align-center justify-center">
+            <v-text-field
+              dense
+              outlined
+              class="mt-6 mx-5"
+              label="Refferal Code"
+              disabled
+              :value="code"
+            ></v-text-field>
+            <v-btn
+              class="indigo darken-4 white--text"
+              depressed
+              v-clipboard:copy="referal"
+              @click="snackbar = true"
+              >Copy</v-btn
+            >
+          </v-card>
+        </v-flex>
+      </v-layout>
 
       <v-layout row wrap>
         <v-flex x12 md12>
@@ -101,6 +187,15 @@
           </v-card>
         </v-flex>
       </v-layout>
+      <v-snackbar v-model="snackbar" :timeout="timeout">
+        You Copied Refferal Code
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-container>
   </div>
 </template>
@@ -149,6 +244,10 @@ export default {
     fills: false,
     mag: "",
     dialog: true,
+    referal: "",
+    snackbar: false,
+    timeout: 2000,
+    code: ""
   }),
 
   methods: {
@@ -193,6 +292,8 @@ export default {
     ).toString(Crypto.enc.Utf8);
 
     const data = JSON.parse(decrypted);
+    this.code = data.referal
+    this.referal = "http://fizzcoin.org/#/sign-up/"+ data.referal
     this.dialog = !(data.kyc_type > -1);
   },
 };
@@ -200,9 +301,9 @@ export default {
 
 <style lang="sass" scoped>
 .v-card.on-hover.theme--dark
-    background-color: rgba(#FFF, 0.8)
+  background-color: rgba(#FFF, 0.8)
 >.v-card__text
-    color: #000
+  color: #000
 </style>
 <style scoped>
 .border {

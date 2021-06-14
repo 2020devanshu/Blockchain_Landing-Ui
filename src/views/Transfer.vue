@@ -361,7 +361,7 @@ export default {
             this.successmsg =
               "Successfully Transfered " +
               apidata.inputvalue +
-              " MAG tokens to " +
+              " Fizz tokens to " +
               this.name;
             this.successDialog = true;
           }
@@ -382,12 +382,14 @@ export default {
       ).toString(Crypto.enc.Utf8);
 
       const wallet = JSON.parse(decrypted);
+      console.log(wallet);
       const response = await axios.post(
         `http://api.fizzcoin.org:5000/eth/getuseretherbalance`,
         {
           usdtaddress: wallet.walladdress,
         }
       );
+      console.log(response)
       this.etharBalance = +response.data.msg / Math.pow(10, 18);
     },
 
