@@ -300,7 +300,7 @@ export default {
     },
     async verify() {
       const verify = await axios.post(
-        "http://api.fizzcoin.org/api/wallet/verify",
+        "http://payments.fizzcoin.org/api/wallet/verify",
         {
           wallet: this.reciever,
         }
@@ -327,7 +327,7 @@ export default {
 
       const wallet = JSON.parse(decrypted);
       const response = await axios.post(
-        `http://api.fizzcoin.org:5000/eth/gettokenbalance`,
+        `http://api.fizzcoin.org/eth/gettokenbalance`,
         {
           usdtaddress: wallet.walladdress,
         }
@@ -342,12 +342,12 @@ export default {
         };
 
         const post = await axios.post(
-          "http://api.fizzcoin.org:5000/eth/transfertoken",
+          "http://api.fizzcoin.org/eth/transfertoken",
           apidata
         );
         if (post.status === 200) {
           const status = await axios.post(
-            "http://api.fizzcoin.org/api/transfer/tokentransfer",
+            "http://payments.fizzcoin.org/api/transfer/tokentransfer",
             {
               userid: wallet.id,
               recieveraddress: apidata.recieveraddress,
@@ -384,7 +384,7 @@ export default {
       const wallet = JSON.parse(decrypted);
       console.log(wallet);
       const response = await axios.post(
-        `http://api.fizzcoin.org:5000/eth/getuseretherbalance`,
+        `http://api.fizzcoin.org/eth/getuseretherbalance`,
         {
           usdtaddress: wallet.walladdress,
         }
@@ -399,7 +399,7 @@ export default {
         this.wrongPass = false;
       } else {
         const response = await axios
-          .post("http://api.fizzcoin.org:80/api/user/login", {
+          .post("http://payments.fizzcoin.org/api/user/login", {
             email: this.wallet.email,
             password: this.password,
           })

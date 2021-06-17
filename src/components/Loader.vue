@@ -22,7 +22,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    height: 95vh;
+    height: 80vh;
 }
 
 .loader-image{

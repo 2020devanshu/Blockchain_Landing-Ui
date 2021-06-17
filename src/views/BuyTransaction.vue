@@ -52,7 +52,7 @@ export default {
     const decrypted = Crypto.AES.decrypt(userInfo, 'Z57wOYU9pYT1spEnKRtyjsbjhvb_djwbdj!$5451').toString(Crypto.enc.Utf8)
     
     const data = JSON.parse(decrypted);
-        let response = await axios.post('http://api.fizzcoin.org/api/referal/ref', {
+        let response = await axios.post('http://payments.fizzcoin.org/api/referal/ref', {
           refCode: data.referal
         })
       //  console.log(response)

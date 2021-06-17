@@ -51,43 +51,41 @@
                     <h3 class="sign-in-text">Verify Email</h3>
                     <div>
                       <form v-if="!otp">
-                      <v-text-field
-                        v-model="email"
-                        required
-                        label="Email"
-                        dense
-                        outlined
-                      ></v-text-field>
-                      <v-btn
-                        depressed
-    
-                        @click="otp = true"
-                        class="mb-5 indigo darken-4 white--text"
-                        >Send OTP</v-btn
-                      >
+                        <v-text-field
+                          v-model="email"
+                          required
+                          label="Email"
+                          dense
+                          outlined
+                        ></v-text-field>
+                        <v-btn
+                          depressed
+                          @click="otp = true"
+                          class="mb-5 indigo darken-4 white--text"
+                          >Send OTP</v-btn
+                        >
                       </form>
                       <form v-if="otp">
                         <v-text-field
-                        v-model="email"
-                        required
-                        label="Email"
-                        disabled
-                        dense
-                        outlined
-                      ></v-text-field>
-                      <v-text-field
-                       
-                        required
-                        label="OTP"
-                        dense
-                        outlined
-                      ></v-text-field>
-                      <v-btn
-                        depressed
-                        @click="e6 = 2"
-                        class=" indigo darken-4 white--text"
-                        >Verify</v-btn
-                      >
+                          v-model="email"
+                          required
+                          label="Email"
+                          disabled
+                          dense
+                          outlined
+                        ></v-text-field>
+                        <v-text-field
+                          required
+                          label="OTP"
+                          dense
+                          outlined
+                        ></v-text-field>
+                        <v-btn
+                          depressed
+                          @click="e6 = 2"
+                          class="indigo darken-4 white--text"
+                          >Verify</v-btn
+                        >
                       </form>
                     </div>
                   </v-stepper-content>
@@ -96,10 +94,11 @@
                       <img src="../assets/logo-fizz.png" alt="" />
                     </div>
                     <h3 class="sign-in-text">SIGN UP</h3>
-                    <form>
+                    <v-form ref="form" v-model="valid" lazy-validation>
                       <v-text-field
                         v-model="full_name"
                         required
+                        :rules="[(v) => !!v || 'Name is required']"
                         label="Full Name"
                         dense
                         outlined
@@ -108,6 +107,13 @@
                         required
                         label="Phone Number"
                         v-model="phone_number"
+                        :counter="10"
+                        :rules="[
+                          (v) => !!v || 'Phone Number is required',
+                          (v) =>
+                            (v && v.length >= 10) ||
+                            'Phone Number must be 10 characters',
+                        ]"
                         dense
                         outlined
                       ></v-text-field>
@@ -115,11 +121,16 @@
                         required
                         label="Email"
                         v-model="email"
+                        :rules="[
+                          (v) => !!v || 'E-mail is required',
+                          (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+                        ]"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         required
+                        :rules="[(v) => !!v || 'Password is required']"
                         label="Password"
                         dense
                         outlined
@@ -139,7 +150,7 @@
                         class="indigo darken-4 white--text"
                         >SIGN UP</v-btn
                       >
-                    </form>
+                    </v-form>
                   </v-stepper-content>
                 </v-stepper-items>
               </v-stepper>
@@ -173,14 +184,22 @@ export default {
       loader: true,
       data: null,
       refferal: this.$route.params.id,
-      otp: false
+      otp: false,
+      valid: true,
+      nameRules: [
+        (v) => !!v || "Phone Number is required",
+        (v) =>
+          (v && v.length <= 10) ||
+          "Phone Number must be less than 10 characters",
+      ],
     };
   },
   methods: {
     async handleSubmit() {
-      this.loader = false;
+      this.$refs.form.validate();
+      //  this.loader = false;
       const response = await axios.post(
-        "http://api.fizzcoin.org/api/user/register",
+        "http://payments.fizzcoin.org/api/user/register",
         {
           email: this.email,
           name: this.full_name,

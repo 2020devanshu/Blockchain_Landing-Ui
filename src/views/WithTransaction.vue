@@ -86,7 +86,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       let response = await axios.post(
-        "http://api.fizzcoin.org/api/transfer/sent",
+        "http://payments.fizzcoin.org/api/transfer/sent",
         {
           userid: data.id,
         }
@@ -112,7 +112,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       let response = await axios.post(
-        "http://api.fizzcoin.org/api/transfer/received",
+        "http://payments.fizzcoin.org/api/transfer/received",
         {
           userid: data.id,
         }

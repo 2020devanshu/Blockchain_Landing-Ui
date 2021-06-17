@@ -160,7 +160,7 @@ export default {
     async passData() {
       this.$refs.form.validate()
       const response = await axios
-        .post("http://api.fizzcoin.org/api/payment/params", {
+        .post("http://payments.fizzcoin.org/api/payment/params", {
           usd: this.amount_usd,
           fizz: this.amount_mag,
           wallet: this.wallet,

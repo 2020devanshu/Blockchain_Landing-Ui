@@ -23,11 +23,80 @@
         ><v-toolbar-title class="grey--text text--darken-3"
           ><div class="title">
             <img class="logo" src="./assets/logo-fizz.png" alt="" />
-            <h4>Fizzcoin</h4>
+            <h4>FizzCoin</h4>
           </div></v-toolbar-title
         ></router-link
       >
       <v-spacer></v-spacer>
+
+      <router-link to="/notifications"
+        ><v-btn
+          v-if="
+            this.$store.state.authenticated ||
+            this.$store.state.adminAuthentication
+          "
+          class="
+            d-flex d-md-none d-xl-none d-lg-none d-sm-none
+            align-center
+            justify-center
+          "
+          text
+          fab
+          v-bind="attrs"
+          v-on="on"
+          @click="getNotification()"
+        >
+          <i color="indigo" class="fa fa-bell text-center mx-auto"></i>
+        </v-btn>
+      </router-link>
+
+      <v-menu
+        v-if="
+          this.$store.state.authenticated ||
+          this.$store.state.adminAuthentication
+        "
+        bottom
+        left
+        :offset-y="true"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            class="
+              d-none d-md-flex d-xl-flex d-lg-flex d-sm-flex
+              align-center
+              justify-center
+            "
+            text
+            fab
+            v-bind="attrs"
+            v-on="on"
+            @click="getNotification()"
+          >
+            <i color="indigo" class="fa fa-bell text-center mx-auto"></i>
+          </v-btn>
+        </template>
+        <v-card width="300">
+          <v-card-title> Notifications </v-card-title>
+          <v-divider></v-divider>
+
+          <v-card-content class="overflow-y-auto">
+            <div class="noti">
+              <v-list dense>
+               
+                <div v-for="item in notification" :key="item.id" class="mt-3">
+                  <v-list-item class="my-n1" dense>
+                    <p class="list-item grey--text text--darken-2 ma-0">
+                      {{ item.msg }}
+                    </p>
+                  </v-list-item>
+                  <v-divider class="mt-2 mx-4"></v-divider>
+                </div>
+              </v-list>
+            </div>
+          </v-card-content>
+        </v-card>
+      </v-menu>
+
       <div v-if="this.$store.state.authenticated">
         <v-btn depressed class="indigo darken-4 white--text" @click="logOut()"
           >LOG OUT</v-btn
@@ -38,6 +107,7 @@
           >LOG OUT</v-btn
         >
       </div>
+
       <div
         class="d-none d-md-flex d-lg-flex"
         v-if="
@@ -45,7 +115,7 @@
           !this.$store.state.adminAuthentication
         "
       >
-        <router-link class="links" to="/about"
+     <!--   <router-link class="links" to="/about"
           ><v-btn depressed color="indigo--text text--darken-4"
             >About</v-btn
           ></router-link
@@ -64,7 +134,7 @@
           ><v-btn depressed color="indigo--text text--darken-4"
             >NFT</v-btn
           ></router-link
-        >
+        > -->
 
         <router-link class="links" to="/sign-in">
           <v-btn depressed color="indigo--text text--darken-4"
@@ -78,7 +148,10 @@
         >
       </div>
       <div
-        v-if="!this.$store.state.adminAuthentication && !this.$store.state.authenticated"
+        v-if="
+          !this.$store.state.adminAuthentication &&
+          !this.$store.state.authenticated
+        "
         class="d-flex d-md-none d-lg-none"
       >
         <router-link class="links" to="/sign-in">
@@ -272,7 +345,6 @@
                   >Buy History</v-list-item-title
                 >
               </v-list-item-content>
-              
             </v-list-item>
             <v-list-item color="indigo" router to="/withdrawal-transaction">
               <v-list-item-icon>
@@ -295,7 +367,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-     
+
           <v-list-item color="indigo" router to="/profile">
             <v-list-item-icon>
               <v-icon color="indigo--text">fa fa-user</v-icon>
@@ -321,6 +393,7 @@
 
 <script>
 import Crypto from "crypto-js";
+import axios from 'axios'
 export default {
   name: "App",
 
@@ -336,7 +409,9 @@ export default {
 
   data: () => ({
     selectedItem: 0,
+    owLoader: true,
     drawer: true,
+    message: "Loading Notifications",
     items: [
       { icon: "fa fa-th-large", text: "Dashboard", route: "/" },
       { icon: "fa fa-briefcase", text: "Buy MAG", route: "/deposit" },
@@ -376,6 +451,30 @@ export default {
     logOut() {
       this.$store.dispatch("logout");
     },
+    async getNotification() {
+      this.notification = [];
+      this.showLoader = true;
+      this.message = "Loading Notifications";
+      const name = localStorage.getItem("user");
+      //    console.log(name)
+      const decrypted = Crypto.AES.decrypt(
+        name,
+        "Z57wOYU9pYT1spEnKRtyjsbjhvb_djwbdj!$5451"
+      ).toString(Crypto.enc.Utf8);
+      //  console.log(decrypted)
+      const data = JSON.parse(decrypted);
+      const response = await axios.post(
+        "http://payments.fizzcoin.org/api/user/getNotified",
+        {
+          userId: data.id,
+        }
+      );
+      this.notification = response.data.notifications;
+      if (this.notification.length == 0) {
+        this.message = "Nothing to show";
+      }
+      this.showLoader = false;
+    },
     image() {
       const name = localStorage.getItem("user");
       //    console.log(name)
@@ -401,6 +500,13 @@ export default {
 
 
 <style>
+.fa-bell {
+  font-size: 1.7rem;
+  margin-right: 15px;
+  color: #1a237e;
+  cursor: pointer;
+  position: relative;
+}
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
 * {
   text-decoration: none;

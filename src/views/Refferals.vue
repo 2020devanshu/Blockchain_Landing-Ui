@@ -537,7 +537,7 @@ export default {
       const data = JSON.parse(decrypted);
 
       const response = await axios.post(
-        "http://api.fizzcoin.org/api/user/activeplans",
+        "http://payments.fizzcoin.org/api/user/activeplans",
         {
           userId: data.id,
         }
@@ -555,7 +555,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       const response = await axios.post(
-        "http://api.fizzcoin.org/api/user/getEarnings",
+        "http://payments.fizzcoin.org/api/user/getEarnings",
         {
           userid: data.id,
         }
@@ -584,7 +584,7 @@ export default {
         wallet: data.walladdress,
       };
       const response = await axios.post(
-        "http://api.fizzcoin.org:80/api/payment/plan",
+        "http://payments.fizzcoin.org/api/payment/plan",
         pay
       );
       this.$router.push({ name: "Form", params: { data: response.data } });

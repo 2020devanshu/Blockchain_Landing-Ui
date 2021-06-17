@@ -54,7 +54,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       let response = await axios.post(
-        "http://api.fizzcoin.org/api/user/getVMag",
+        "http://payments.fizzcoin.org/api/user/getVFizz",
         {
           userId: data.id,
         }

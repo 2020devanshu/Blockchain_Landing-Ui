@@ -63,7 +63,7 @@
                   class="indigo darken-4 white--text"
                   >Log In</v-btn
                 >
-                <p>Forget Password</p>
+                <router-link to="/forget"><p class="text-end pt-2 indigo--text text--darken-3">Forget Password?</p></router-link>
               </v-form>
             </v-card>
           </v-flex>

@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-5">
     <Loader v-if="loader" />
-    <div v-if="!error  && !loader" class="content mx-auto text-center text-h5">
+    <div v-if="!error && !loader" class="content mx-auto text-center text-h5">
       <v-img class="image" src="../assets/success.gif"></v-img>
       {{ content }} Fizz coins added to your wallet. Click
       <a href="/"> here </a> to see your updated balance
@@ -31,10 +31,11 @@ export default {
   },
 
   methods: {
+    
     async get() {
-      this.error = false
+      this.error = false;
       const response = await axios.post(
-        "http://api.fizzcoin.org/api/payment/details",
+        "http://payments.fizzcoin.org/api/payment/details",
         {
           transactionId: this.id,
         }
@@ -47,27 +48,29 @@ export default {
         this.error = true;
       }
       if (response.data.status === 200) {
-        const userInfo = localStorage.getItem("user");
-        //  console.log(userInfo)
-        const decrypted = Crypto.AES.decrypt(
-          userInfo,
-          "Z57wOYU9pYT1spEnKRtyjsbjhvb_djwbdj!$5451"
-        ).toString(Crypto.enc.Utf8);
+        if (response.data.transaction.status === 1) {
+          const userInfo = localStorage.getItem("user");
+          //  console.log(userInfo)
+          const decrypted = Crypto.AES.decrypt(
+            userInfo,
+            "Z57wOYU9pYT1spEnKRtyjsbjhvb_djwbdj!$5451"
+          ).toString(Crypto.enc.Utf8);
 
-        const wallet = JSON.parse(decrypted);
-        let data = {
-          recieveraddress: wallet.walladdress,
-          inputvalue: response.data.transaction.fizz,
-        };
-        const post = await axios.post(
-          "http://api.fizzcoin.org:5000/eth/transfertokenfromadmin",
-          data
-        );
+          const wallet = JSON.parse(decrypted);
+          let data = {
+            recieveraddress: wallet.walladdress,
+            inputvalue: response.data.transaction.fizz,
+          };
+          const post = await axios.post(
+            "http://api.fizzcoin.org/eth/transfertokenfromadmin",
+            data
+          );
 
-        if (post.status === 200) {
-          this.content = data.inputvalue + "";
-          
-          this.loader = false;
+          if (post.status === 200) {
+            this.content = data.inputvalue + "";
+
+            this.loader = false;
+          }
         }
       }
     },

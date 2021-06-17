@@ -93,7 +93,7 @@
                       </v-btn>
                     </div>
                     <v-list-item-title class="headline mb-1 white--text">
-                      ${{ parseInt(mag * 0.003 * 10000) / 10000 }}
+                      ${{ parseInt(mag * 0.001 * 10000) / 10000 }}
                     </v-list-item-title>
                     <v-list-item-subtitle class="white--text">
                       Fizz(USD)
@@ -263,7 +263,7 @@ export default {
       // console.log(data)
       // console.log(wallet);
       const response = await axios.post(
-        `http://api.fizzcoin.org:5000/eth/gettokenbalance`, //getsoldtokens
+        `http://api.fizzcoin.org/eth/gettokenbalance`, //getsoldtokens
         {
           usdtaddress: data.walladdress,
         }

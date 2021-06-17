@@ -96,7 +96,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       let response = await axios.post(
-        "http://api.fizzcoin.org/api/admin/users",
+        "http://payments.fizzcoin.org/api/admin/users",
         {
           userId: data.id,
         }
@@ -105,6 +105,7 @@ export default {
       if (response.status === 200) {
         this.loader = false;
       }
+
       let count = 1;
       response.data.users.forEach((element) => {
         element.count = count++;

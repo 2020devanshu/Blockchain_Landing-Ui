@@ -3,17 +3,19 @@
     <section class="home-page">
       <div class="home-page-content">
         <img src="./assets/img/iii.gif" alt="" />
-        <div class="home-page-content-text">
+        <div class="home-page-content-text d-flex flex-column align-center">
           <p class="white--text text-h4 font-weight-bold">
-            Better Blockchain experience with Fizzcoin
+            Better Blockchain experience with FizzCoin
           </p>
-          <p class="white--text">
+          <p class="white--text text-center">
             Welcome to Fizznet We are a brand new blockchain network which is
             open to all developers and projects. Fizznet automaticlly pay
             exclusive royalties. Fizznet offers very low network as 3rd party
             API connection.. Fizznet offer our very own mining software for
             ecofriendly mining.
           </p>
+
+          <router-link to="/sign-up"><v-btn class="indigo--text text--darken-3 mt-5 font-weight-bold pa-5" depressed>Buy FizzCoin</v-btn></router-link>
         </div>
       </div>
     </section>
@@ -61,13 +63,13 @@
         <img class="starting" src="./assets/img/kk.gif" alt="" />
         <v-card
           width="300"
-          class="mt-5 text-center d-flex flex-column align-start pa-5 mx-auto"
+          class="mt-5 text-center d-flex flex-column align-center pa-5 mx-auto"
         >
-          <p class="grey--text text-darken-2">Jan 2017 - March 2018</p>
-          <p class="text-h6">High-throughout</p>
-          <p class="grey--text text-start text-darken-2">
-            High throughput is achieved by improving the TPS in fizznet, which
-            has surpassed Bitcoin and Ethereum, to a daily-use practical degree.
+          <img src="../assets/team/feature-1.svg" alt="">
+          <p class="my-2 text-h6 text-center">Instant Settlement</p>
+          <p class="grey--text text-center text-darken-2">
+            You can use the funds right away instead of waiting the typical two
+            trading days
           </p>
         </v-card>
       </v-container>
@@ -76,61 +78,56 @@
       <img class="web" src="./assets/img/kk.gif" alt="" />
       <v-card
         width="300"
-        class="mt-5 text-center d-flex flex-column align-start pa-5 mx-auto"
+        class="mt-5 text-center d-flex flex-column align-center pa-5 mx-auto"
       >
-        <p class="grey--text text-darken-2">Jan 2017 - March 2018</p>
-        <p class="text-h6">High-throughout</p>
-        <p class="grey--text text-start text-darken-2">
-          High throughput is achieved by improving the TPS in fizznet, which has
-          surpassed Bitcoin and Ethereum, to a daily-use practical degree.
-        </p>
+        <img src="../assets/team/feature-2.svg" alt="">
+          <p class="my-2 text-h6 text-center">Flexibility</p>
+          <p class="grey--text text-center text-darken-2">
+            we offer Android + iOS pocket wallet for purchasing, exchanging & selling.
+          </p>
       </v-card>
       <v-card
         width="300"
-        class="mt-5 text-center d-flex flex-column align-start pa-5 mx-auto"
+        class="mt-5 text-center d-flex flex-column align-center pa-5 mx-auto"
       >
-        <p class="grey--text text-darken-2">Jan 2017 - March 2018</p>
-        <p class="text-h6">High-throughout</p>
-        <p class="grey--text text-start text-darken-2">
-          High throughput is achieved by improving the TPS in fizznet, which has
-          surpassed Bitcoin and Ethereum, to a daily-use practical degree.
-        </p>
+         <img src="../assets/team/feature-3.svg" alt="">
+          <p class="my-2 text-h6 text-center">Exchange</p>
+          <p class="grey--text text-center text-darken-2">
+           Users can exchange NFTs through the app and other platforms
+          </p>
       </v-card>
     </div>
     <div class="card-section">
       <v-card
         width="300"
-        class="mt-5 text-center d-flex flex-column align-start pa-5 mx-auto"
+        class="mt-5 text-center d-flex flex-column align-center pa-5 mx-auto"
       >
-        <p class="grey--text text-darken-2">Jan 2017 - March 2018</p>
-        <p class="text-h6">High-throughout</p>
-        <p class="grey--text text-start text-darken-2">
-          High throughput is achieved by improving the TPS in fizznet, which has
-          surpassed Bitcoin and Ethereum, to a daily-use practical degree.
-        </p>
+         <img src="../assets/team/feature-4.svg" alt="">
+          <p class="my-2 text-h6 text-center">NFT's</p>
+          <p class="grey--text text-center text-darken-2">
+            We offer NFTs in the form of audio with the concept of geo location
+          </p>
       </v-card>
       <v-card
         width="300"
-        class="mt-5 text-center d-flex flex-column align-start pa-5 mx-auto"
+        class="mt-5 text-center d-flex flex-column align-center pa-5 mx-auto"
       >
-        <p class="grey--text text-darken-2">Jan 2017 - March 2018</p>
-        <p class="text-h6">High-throughout</p>
-        <p class="grey--text text-start text-darken-2">
-          High throughput is achieved by improving the TPS in fizznet, which has
-          surpassed Bitcoin and Ethereum, to a daily-use practical degree.
-        </p>
+         <img src="../assets/team/feature-5.svg" alt="">
+          <p class="my-2 text-h6 text-center">High Profile</p>
+          <p class="grey--text text-center text-darken-2">
+            As per the extra ordinary concept of NFTs, one can have the high profit from our platform
+          </p>
       </v-card>
     </div>
     <v-card
       width="300"
-      class="my-7 text-center d-flex flex-column align-start pa-5 mx-auto"
+      class="my-7 text-center d-flex flex-column align-center pa-5 mx-auto"
     >
-      <p class="grey--text text-darken-2">Jan 2017 - March 2018</p>
-      <p class="text-h6">High-throughout</p>
-      <p class="grey--text text-start text-darken-2">
-        High throughput is achieved by improving the TPS in fizznet, which has
-        surpassed Bitcoin and Ethereum, to a daily-use practical degree.
-      </p>
+       <img src="../assets/team/feature-6.svg" alt="">
+          <p class="my-2 text-h6 text-center">API Support</p>
+          <p class="grey--text text-center text-darken-2">
+            You can get the API from our platform for the integration in the custom platforms
+          </p>
     </v-card>
     <section class="timer my-5">
       <p
@@ -153,22 +150,30 @@
       <div class="timer-content">
         <div class="time">
           <div class="time-content">
-            <p class="white--text text-h5 font-weight-bold text-center">{{ days }} days</p>
+            <p class="white--text text-h5 font-weight-bold text-center">
+              {{ days }} days
+            </p>
           </div>
         </div>
         <div class="time">
           <div class="time-content">
-            <p class="white--text text-h5 font-weight-bold text-center">{{ hours }} hours</p>
+            <p class="white--text text-h5 font-weight-bold text-center">
+              {{ hours }} hours
+            </p>
           </div>
         </div>
         <div class="time">
           <div class="time-content">
-            <p class="white--text text-h5 font-weight-bold text-center">{{ minutes  }} minutes</p>
+            <p class="white--text text-h5 font-weight-bold text-center">
+              {{ minutes }} minutes
+            </p>
           </div>
         </div>
         <div class="time">
           <div class="time-content">
-            <p class="white--text text-h5 font-weight-bold text-center">{{ seconds }} seconds</p>
+            <p class="white--text text-h5 font-weight-bold text-center">
+              {{ seconds }} seconds
+            </p>
           </div>
         </div>
       </div>
@@ -180,8 +185,7 @@
           <p class="grey--text text--darken-2">Start a new dream</p>
         </div>
         <a class="buy-fizznet" href="#"
-          >Buy Fizznet <i class="fa fa-long-arrow-right" aria-hidden="true"></i
-        ></a>
+          >Buy Fizznet <i class="fas fa-arrow-right"></i></a>
       </div>
     </section>
     <footer class="bg-secondary-gradient">
@@ -202,16 +206,16 @@
                 </p>
                 <div class="social-icons">
                   <a href="#">
-                    <i class="fa fa-facebook"></i>
+                    <i id="icon" class="fab fa-facebook-f"></i>
                   </a>
                   <a href="#">
-                    <i class="fa fa-twitter"></i>
+                    <i id="icon" class="fab fa-twitter"></i>
                   </a>
                   <a href="#">
-                    <i class="fa fa-instagram"></i>
+                   <i id="icon" class="fab fa-instagram"></i>
                   </a>
                   <a href="#">
-                    <i class="fa fa-youtube-play"></i>
+                    <i id="icon" class="fab fa-youtube"></i>
                   </a>
                 </div>
               </div>
@@ -398,6 +402,15 @@ export default {
   background: url("./assets/img/demo-banner.png");
   background-position: center;
   background-size: cover;
+}
+
+.social-icons{
+  color: white;
+}
+
+#icon{
+  color: white;
+  margin-right: 10px;
 }
 
 .home-page-content {

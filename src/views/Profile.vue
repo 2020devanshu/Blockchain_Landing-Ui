@@ -126,7 +126,7 @@
             <v-list two-line>
               <v-list-item>
                 <div class="text-h6 mx-auto">
-                  {{ data.kyc_type == 0 ? "Driving License" : "Aaadhar Card" }}
+                  {{ data.kyc_type == 0 ? "Driving License" : "Passport" }}
                 </div>
               </v-list-item>
             </v-list>
@@ -259,7 +259,7 @@ export default {
           data.kyc2 = this.base64[1];
         }
         const imageUpload = await axios.post(
-          "http://api.fizzcoin.org/api/user/uploadKYC",
+          "http://payments.fizzcoin.org/api/user/uploadKYC",
           data
         );
         user.kyc_type = this.value;
