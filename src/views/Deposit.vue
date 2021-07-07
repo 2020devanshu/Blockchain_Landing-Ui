@@ -18,7 +18,7 @@
           Pay Using Paypal
         </v-card-title>
 
-        <v-card-content>
+        <v-card-content>                                    
           <div id="payment-request-button">
             <!-- A Stripe Element will be inserted here. -->
           </div>
@@ -78,7 +78,7 @@
 
       <v-flex x12 md6>
         <v-card class="d-flex flex-column align-center pa-12 ma-5">
-          <v-img src="../assets/qr-code.jpg"></v-img>
+          <vue-qrcode width="400" :value="wallet" />
 
           <v-text-field
             dense
@@ -114,10 +114,14 @@
 import axios from "axios";
 import Crypto from "crypto-js";
 import moment from "moment";
+import VueQrcode from 'vue-qrcode'
 var stripe = Stripe(
-  "pk_test_51J1rkVCDTwpG4GpKK8ThGfMLNGBsNPTRD34XoV4JJcqGYgwzvPM2jQ4waREne0ZGxdmGgEGWbuulNkGS8HdOdOeB00Ey1jNZnL"
+  "pk_live_51J1rkVCDTwpG4GpKErT5nSiJr1hVfz6qDAuBZxhuSPssh6jWHtS3Wl3nooV87KoU3tr3zNairaB40bN5Vh8zgssf00UD02U4b2"
 );
 export default {
+  components: {
+    VueQrcode
+  },
   data() {
     return {
       res: [],
@@ -160,7 +164,7 @@ export default {
     async passData() {
       this.$refs.form.validate()
       const response = await axios
-        .post("http://payments.fizzcoin.org/api/payment/params", {
+        .post("https://payments.fizzcoin.org/api/payment/params", {
           usd: this.amount_usd,
           fizz: this.amount_mag,
           wallet: this.wallet,

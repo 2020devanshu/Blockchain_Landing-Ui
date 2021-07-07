@@ -46,7 +46,7 @@ export default new Vuex.Store({
     login ({ commit }, credentials) {
    
       return axios
-        .post('http://payments.fizzcoin.org/api/user/login', credentials)
+        .post('https://payments.fizzcoin.org/api/user/login', credentials)
         .then(({ data }) => {
           commit('setUserData', data)
         })

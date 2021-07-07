@@ -7,7 +7,7 @@
           <v-card width="350" class="pa-5">
             <v-card-content>
               <div class="d-flex justify-center align-center flex-column">
-         <!--       <img class="ok-gif" src="../assets/Ok.gif" alt=""> -->
+                <img class="ok-gif" src="../assets/Ok.gif" alt="">
                 <p class="grey--text text--darken-2 text-center mx-auto">Your Password has been Resetted</p>
               </div>
             </v-card-content>
@@ -15,7 +15,7 @@
             <v-card-action class="d-flex justify-center align-center">
               <v-spacer></v-spacer>
               <router-link to="/sign-in"
-                ><v-btn  class="white--text sign-up-button mt-3"
+                ><v-btn  class="white--text indigo darken-4 mt-3"
                   >LOGIN</v-btn
                 ></router-link
               >
@@ -33,7 +33,7 @@
               <v-img class="logo-sign my-5" src="../assets/logo-fizz.png"></v-img>
               <p
                 style="z-index: 3"
-                class="text-h4 font-weight-bold text-center text--darken-3 grey--text"
+                class="text-h4 font-weight-bold text-center white--text"
               >
                 Welcome To Fizz network
               </p>
@@ -133,7 +133,7 @@
                       <v-btn
                         depressed
                         @click="change()"
-                        class="sign-up-button white--text"
+                        class="indigo darken-4 white--text"
                         >Change Password</v-btn
                       >
                     </form>
@@ -181,7 +181,58 @@ export default {
     };
   },
 
+  methods: {
+    async sendOTP() {
+      this.invalid = "";
+      this.disabled_otp = true;
+      const response = await axios.post(
+        "https://payments.fizzcoin.org/api/user/resetEmail",
+        {
+          email: this.email,
+        }
+      );
+      if (response.data.status === 200) {
+        this.otp = true;
+      }
+      this.invalid = response.data.msg;
 
+      this.disabled_otp = false;
+    },
+
+    async verify() {
+      this.disabled_otp = true;
+      this.invalid = "";
+      const response = await axios.post(
+        "https://payments.fizzcoin.org/api/user/verifyOTP",
+        {
+          email: this.email,
+          otp: this.otp_value,
+          type: 1,
+        }
+      );
+
+      if (response.data.status === 200) {
+        this.e6 = 2;
+      }
+      this.invalid = response.data.msg;
+      this.disabled_otp = false;
+    },
+
+    async change() {
+      const response = await axios.post(
+        "https://payments.fizzcoin.org/api/user/resetPassword",
+        {
+          email: this.email,
+          password: this.password1,
+          confirm: this.password2,
+        }
+      );
+
+      if (response.data.status === 200) {
+        this.dialog = true;
+      }
+    },
+  },
 };
 </script>
 

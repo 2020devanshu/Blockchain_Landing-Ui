@@ -162,7 +162,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       let response = await axios.post(
-        "http://payments.fizzcoin.org/api/admin/kycUsers",
+        "https://payments.fizzcoin.org/api/admin/kycUsers",
         {
           userId: data.id,
         }
@@ -196,7 +196,7 @@ export default {
         adminId: data.id
       }
       console.log(apiData);
-      const response = await axios.post('http://payments.fizzcoin.org/api/admin/approveKYC', apiData)
+      const response = await axios.post('https://payments.fizzcoin.org/api/admin/approveKYC', apiData)
       if(response.status === 200){
         this.dialog = false
         this.loader = false

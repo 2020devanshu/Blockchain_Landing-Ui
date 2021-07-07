@@ -100,41 +100,55 @@
                 <h2 class="grey--text text--darken-3 text-center">
                   P2P Transfer
                 </h2>
-
-                <v-text-field
-                  label="Reciever Wallet"
-                  dense
-                  :disabled="disabled.wallet"
-                  v-model="reciever"
-                  outlined
-                ></v-text-field>
-                <v-text-field
-                  label="Reciever Name"
-                  dense
-                  :value="name"
-                  disabled
-                  outlined
-                ></v-text-field>
-                <v-text-field
-                  label="Amount"
-                  dense
-                  v-model="amount_value"
-                  :disabled="disabled.amount"
-                  outlined
-                ></v-text-field>
-
-                <v-btn
-                  :disabled="disabled.verify"
-                  @click="verify()"
-                  class="indigo darken-4 white--text"
-                  >VERIFY</v-btn
+                <v-form
+                  class="d-flex align-center flex-column"
+                  ref="form"
+                  v-model="valid"
+                  lazy-validation
                 >
-                <v-btn
-                  :disabled="disabled.transfer"
-                  @click="transfer()"
-                  class="indigo darken-4 white--text"
-                  >Transfer</v-btn
-                >
+                  <v-text-field
+                    label="Reciever Wallet"
+                    dense
+                    :disabled="disabled.wallet"
+                    :rules="[(v) => !!v || 'Reciver Address is Required']"
+                    required
+                    v-model="reciever"
+                    outlined
+                  ></v-text-field>
+                  <v-text-field
+                    label="Reciever Name"
+                    dense
+                    :value="name"
+                    :rules="[(v) => !!v || 'Reciver Name is Required']"
+                    required
+                    disabled
+                    outlined
+                  ></v-text-field>
+                  <v-text-field
+                    label="Amount"
+                    dense
+                    v-model="amount_value"
+                    :rules="[(v) => !!v || 'Amount is Required']"
+                    required
+                    :disabled="disabled.amount"
+                    outlined
+                  ></v-text-field>
+
+                  <div class="d-flex">
+                    <v-btn
+                      :disabled="disabled.verify"
+                      @click="verify()"
+                      class="indigo darken-4 white--text"
+                      >VERIFY</v-btn
+                    >
+                    <v-btn
+                      :disabled="disabled.transfer"
+                      @click="transfer()"
+                      class="indigo darken-4 white--text"
+                      >Transfer</v-btn
+                    >
+                  </div>
+                </v-form>
               </v-card-header>
             </v-card>
           </v-col>
@@ -159,7 +173,10 @@
                   <v-list-item-content>
                     <div class="mb-4">
                       <v-btn fab color="teal lighten-2" elevation="0">
-                        <v-img class="mog" src="../assets/logo-fizz.png"></v-img>
+                        <v-img
+                          class="mog"
+                          src="../assets/logo-fizz.png"
+                        ></v-img>
                       </v-btn>
                     </div>
                     <v-list-item-title class="headline mb-1 white--text">
@@ -299,8 +316,9 @@ export default {
       this.sign = false;
     },
     async verify() {
+      this.$refs.form.validate()
       const verify = await axios.post(
-        "http://payments.fizzcoin.org/api/wallet/verify",
+        "https://payments.fizzcoin.org/api/wallet/verify",
         {
           wallet: this.reciever,
         }
@@ -317,6 +335,7 @@ export default {
     },
 
     async transfer() {
+      this.$refs.form.validate()
       this.loader = true;
       const userInfo = localStorage.getItem("user");
       //  console.log(userInfo)
@@ -327,7 +346,7 @@ export default {
 
       const wallet = JSON.parse(decrypted);
       const response = await axios.post(
-        `http://api.fizzcoin.org/eth/gettokenbalance`,
+        `https://api.fizzcoin.org/eth/gettokenbalance`,
         {
           usdtaddress: wallet.walladdress,
         }
@@ -342,12 +361,12 @@ export default {
         };
 
         const post = await axios.post(
-          "http://api.fizzcoin.org/eth/transfertoken",
+          "https://api.fizzcoin.org/eth/transfertoken",
           apidata
         );
         if (post.status === 200) {
           const status = await axios.post(
-            "http://payments.fizzcoin.org/api/transfer/tokentransfer",
+            "https://payments.fizzcoin.org/api/transfer/tokentransfer",
             {
               userid: wallet.id,
               recieveraddress: apidata.recieveraddress,
@@ -384,12 +403,12 @@ export default {
       const wallet = JSON.parse(decrypted);
       console.log(wallet);
       const response = await axios.post(
-        `http://api.fizzcoin.org/eth/getuseretherbalance`,
+        `https://api.fizzcoin.org/eth/getuseretherbalance`,
         {
           usdtaddress: wallet.walladdress,
         }
       );
-      console.log(response)
+      console.log(response);
       this.etharBalance = +response.data.msg / Math.pow(10, 18);
     },
 
@@ -399,7 +418,7 @@ export default {
         this.wrongPass = false;
       } else {
         const response = await axios
-          .post("http://payments.fizzcoin.org/api/user/login", {
+          .post("https://payments.fizzcoin.org/api/user/login", {
             email: this.wallet.email,
             password: this.password,
           })

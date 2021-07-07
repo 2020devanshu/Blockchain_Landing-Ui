@@ -32,26 +32,6 @@
       </template>
       </v-data-table>
     </v-card>
-    <!-- <table class="data-table">
-      <thead>
-        <tr>
-          <td>S No.</td>
-          <td>Name</td>
-          <td>E-Mail</td>
-          <td>Wallet</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="payment in payments" :key="payment.walladdress">
-          <td>{{ payment.count }}</td>
-          <td>{{ payment.name }}</td>
-          <td>{{ payment.email }}</td>
-          <td>{{ payment.walladdress }}</td>
-          <td><v-btn></v-btn></td>
-        </tr>
-      </tbody>
-    </table> -->
   </v-container>
 </template>
 
@@ -96,7 +76,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       let response = await axios.post(
-        "http://payments.fizzcoin.org/api/admin/users",
+        "https://payments.fizzcoin.org/api/admin/users",
         {
           userId: data.id,
         }

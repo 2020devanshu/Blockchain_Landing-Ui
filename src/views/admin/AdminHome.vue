@@ -191,7 +191,7 @@ export default {
   methods: {
     async getPaymentData() {
       let response = await axios.get(
-        "http://api.fizzcoin.org/eth/getsoldtokens"
+        "https://api.fizzcoin.org/eth/getsoldtokens"
       );
       this.mag = +response.data.msg / Math.pow(10, 18);
      this.soldMagInr = numAbbr.abbreviate(parseInt(this.mag * 73.04 * 0.23 * 10000) / 10000, 2).toUpperCase()
@@ -211,7 +211,7 @@ export default {
       // console.log(data)
       // console.log(wallet);
       const response = await axios.post(
-        `http://api.fizzcoin.org/eth/gettokenbalance`, //getsoldtokens
+        `https://api.fizzcoin.org/eth/gettokenbalance`, //getsoldtokens
         {
           usdtaddress: data.walladdress,
         }

@@ -82,7 +82,14 @@
           <v-card-content class="overflow-y-auto">
             <div class="noti">
               <v-list dense>
-               
+               <v-list-item v-if="notification.length == 0">
+                  <div class="list-item grey--text text--darken-2 ma-0 d-flex">
+                    <span class="load" v-if="showLoader">
+                      <img src="./assets/login.png" alt="" />
+                    </span>
+                    {{ message }}
+                  </div>
+                </v-list-item>
                 <div v-for="item in notification" :key="item.id" class="mt-3">
                   <v-list-item class="my-n1" dense>
                     <p class="list-item grey--text text--darken-2 ma-0">
@@ -445,6 +452,7 @@ export default {
         route: "/profile",
       },
     ],
+    notification: [],
     menu: false,
   }),
   methods: {
@@ -464,7 +472,7 @@ export default {
       //  console.log(decrypted)
       const data = JSON.parse(decrypted);
       const response = await axios.post(
-        "http://payments.fizzcoin.org/api/user/getNotified",
+        "https://payments.fizzcoin.org/api/user/getNotified",
         {
           userId: data.id,
         }
@@ -515,6 +523,14 @@ export default {
 a {
   text-decoration: none;
 }
+
+.noti {
+  max-height: 400px;
+  min-height: 60px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 
 .class-drawer {
   display: flex;

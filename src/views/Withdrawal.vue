@@ -207,7 +207,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       const response = await axios.post(
-        `http://api.fizzcoin.org/eth/gettokenbalance`,
+        `https://api.fizzcoin.org/eth/gettokenbalance`,
         {
           usdtaddress: data.walladdress,
         }
@@ -224,7 +224,7 @@ export default {
 
       const data = JSON.parse(decrypted);
       const response = await axios.post(
-        "http://payments.fizzcoin.org/api/user/getEarnings",
+        "https://payments.fizzcoin.org/api/user/getEarnings",
         {
           userid: data.id,
         }

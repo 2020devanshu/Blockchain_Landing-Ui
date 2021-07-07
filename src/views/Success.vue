@@ -35,7 +35,7 @@ export default {
     async get() {
       this.error = false;
       const response = await axios.post(
-        "http://payments.fizzcoin.org/api/payment/details",
+        "https://payments.fizzcoin.org/api/payment/details",
         {
           transactionId: this.id,
         }
@@ -62,7 +62,7 @@ export default {
             inputvalue: response.data.transaction.fizz,
           };
           const post = await axios.post(
-            "http://api.fizzcoin.org/eth/transfertokenfromadmin",
+            "https://api.fizzcoin.org/eth/transfertokenfromadmin",
             data
           );
 

@@ -263,7 +263,7 @@ export default {
       // console.log(data)
       // console.log(wallet);
       const response = await axios.post(
-        `http://api.fizzcoin.org/eth/gettokenbalance`, //getsoldtokens
+        `https://api.fizzcoin.org/eth/gettokenbalance`, //getsoldtokens
         {
           usdtaddress: data.walladdress,
         }

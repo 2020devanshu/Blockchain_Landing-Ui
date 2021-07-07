@@ -52,7 +52,7 @@ export default {
       //  console.log(decrypted)
       const data = JSON.parse(decrypted);
       const response = await axios.post(
-        "http://payments.fizzcoin.org/api/user/getNotified",
+        "https://payments.fizzcoin.org/api/user/getNotified",
         {
           userId: data.id,
         }
